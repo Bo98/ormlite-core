@@ -288,7 +288,7 @@ public abstract class BaseDatabaseType implements DatabaseType {
 	/**
 	 * Output the SQL type for the default value for the type.
 	 */
-	private void appendDefaultValue(StringBuilder sb, FieldType fieldType, Object defaultValue) {
+	protected void appendDefaultValue(StringBuilder sb, FieldType fieldType, Object defaultValue) {
 		if (fieldType.isEscapedDefaultValue()) {
 			appendEscapedWord(sb, defaultValue.toString());
 		} else {
