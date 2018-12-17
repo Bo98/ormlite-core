@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.Test;
 
@@ -23,7 +24,7 @@ public class LocalDateTimeSqlTypeTest extends BaseTypeTest {
     public void testDateTime() throws Exception {
         Class<DateTimeTable> clazz = DateTimeTable.class;
         Dao<DateTimeTable, Object> dao = createDao(clazz, true);
-        LocalDateTime val = LocalDateTime.now();
+        LocalDateTime val = LocalDateTime.now().truncatedTo(ChronoUnit.MILLIS);
         Timestamp val2 = Timestamp.valueOf(val);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
         String valStr = formatter.format(val);

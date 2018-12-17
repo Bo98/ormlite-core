@@ -3,7 +3,8 @@ package com.j256.ormlite.field.types;
 import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 
 import com.j256.ormlite.field.FieldType;
 import com.j256.ormlite.field.SqlType;
@@ -26,7 +27,10 @@ public class LocalTimeType extends BaseLocalDateType {
     @Override
     public Object parseDefaultString(FieldType fieldType, String defaultStr) throws SQLException {
         try {
-            return LocalTime.parse(defaultStr, DateTimeFormatter.ofPattern("HH:mm:ss[.SSSSSS]"));
+            return LocalTime.parse(defaultStr, new DateTimeFormatterBuilder()
+                    .appendPattern("HH:mm:ss")
+                    .appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true)
+                    .toFormatter());
         } catch (NumberFormatException e) {
             throw SqlExceptionUtil.create("Problems with field " + fieldType +
                     " parsing default LocalTime value: " + defaultStr, e);
