@@ -59,6 +59,11 @@ public class H2DatabaseType extends BaseDatabaseType {
 	}
 
 	@Override
+	protected void appendByteArrayType(StringBuilder sb, FieldType fieldType, int fieldWidth) {
+		sb.append("BINARY");
+	}
+
+	@Override
 	public void appendOffsetTimeType(StringBuilder sb, FieldType fieldType, int fieldWidth) {
 		sb.append("TIMESTAMP WITH TIME ZONE");
 	}

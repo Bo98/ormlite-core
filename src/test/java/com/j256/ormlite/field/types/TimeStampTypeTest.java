@@ -29,7 +29,6 @@ public class TimeStampTypeTest extends BaseTypeTest {
 		Class<LocalTimeStamp> clazz = LocalTimeStamp.class;
 		Dao<LocalTimeStamp, Object> dao = createDao(clazz, true);
 		GregorianCalendar c = new GregorianCalendar();
-		c.set(GregorianCalendar.MILLISECOND, 0);
 		long millis = c.getTimeInMillis();
 		java.sql.Timestamp val = new java.sql.Timestamp(millis);
 		String format = "yyyy-MM-dd HH:mm:ss.SSSSSS";
