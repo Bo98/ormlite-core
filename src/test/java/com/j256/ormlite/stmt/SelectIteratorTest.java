@@ -368,7 +368,7 @@ public class SelectIteratorTest extends BaseCoreStmtTest {
 			iterator.close();
 		}
 
-		iterator = dao.iterator();
+		iterator = dao.iterator(ResultSet.TYPE_SCROLL_INSENSITIVE);
 		try {
 			assertNull(iterator.previous());
 		} finally {

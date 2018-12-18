@@ -74,7 +74,8 @@ public class BigIntegerTypeTest extends BaseTypeTest {
 		assertEquals(new BigInteger(DEFAULT_VALUE), foo.bigInteger);
 	}
 
-	@Test
+	// Strings as generated IDs are not supported.
+	/*@Test
 	public void testBigIntegerId() throws Exception {
 		Dao<BigIntegerId, BigInteger> dao = createDao(BigIntegerId.class, true);
 		BigIntegerId foo = new BigIntegerId();
@@ -83,7 +84,7 @@ public class BigIntegerTypeTest extends BaseTypeTest {
 		BigIntegerId result = dao.queryForId(BigInteger.ONE);
 		assertNotNull(result);
 		assertEquals(foo.id, result.id);
-	}
+	}*/
 
 	@Test
 	public void testCoverage() {
@@ -117,9 +118,9 @@ public class BigIntegerTypeTest extends BaseTypeTest {
 		BigInteger bigInteger;
 	}
 
-	@DatabaseTable(tableName = TABLE_NAME)
+	/*@DatabaseTable(tableName = TABLE_NAME)
 	protected static class BigIntegerId {
 		@DatabaseField(generatedId = true)
 		BigInteger id;
-	}
+	}*/
 }
