@@ -29,11 +29,12 @@ public class OffsetTimeCompatType extends OffsetTimeType {
     @Override
     public Object parseDefaultString(FieldType fieldType, String defaultStr) throws SQLException {
         try {
-            return OffsetDateTime.parse(defaultStr, new DateTimeFormatterBuilder()
-                    .appendPattern("yyyy-MM-dd HH:mm:ss")
+            OffsetTime time = OffsetTime.parse(defaultStr, new DateTimeFormatterBuilder()
+                    .appendPattern("[yyyy-MM-dd ]HH:mm:ss")
                     .appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true)
                     .appendPattern("x")
                     .toFormatter());
+            return javaToSqlArg(fieldType, time);
         } catch (NumberFormatException e) {
             throw SqlExceptionUtil.create("Problems with field " + fieldType +
                     " parsing default OffsetTime value: " + defaultStr, e);
